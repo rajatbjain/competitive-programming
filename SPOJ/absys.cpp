@@ -1,98 +1,37 @@
-#include <iostream>
-#include <cstdio>
-#include <string>
-#include <string.h>
+#include<iostream>
 using namespace std;
 
-int main()
+int charToNum(string s)
 {
-	int test;
-	char a[200];
-	cin >> test;
-	int d=test;
-	while(test--)
-	{
-	    if (test = d-1)
-            cin.ignore();
+    int num=0;
+    for (int i=0; i<s.length(); i++)
+    {
+        if(!isdigit(s[i]))
+        	return -1;
 
-		gets(a);
-		int i=0, foundAt, A=0, B=0, C=0, indexA, indexB, length=strlen(a);
-		bool flagplus=false, flagequal=false;
-
-		while(a[i] != '\0')
-		{
-		    if (a[i] == '+')
-                {indexA=i;}
-            if (a[i] == '=')
-                {indexB=i;}
-			if(a[i] == 'm')
-			{
-				foundAt = i;
- 			}
- 			++i;
-		}
-
-		if (foundAt>indexB)
-        {
-            flagplus = flagequal = true;
-        }
-        else if (foundAt> indexA && foundAt < indexB)
-        {
-            flagplus=true; flagequal=false;
-        }
-        else
-        {
-            flagplus=false; flagequal = true;
-        }
-
-		if (flagplus == true)
-		{
-			int p = 0;
-			while (p<indexA-1)
-                {
-                    A = (A*10)+(a[p]-'0');
-                    p++;
-                }
-		}
-		else
-        {
-            int p=indexB+2;
-            while (p<length)
-            {
-                A = A*10 + (a[p]-'0');
-                p++;
-            }
-        }
-		if (flagequal == true)
-		{
-			int p=indexA+2;
-			while (p<indexB-1)
-			{
-				B = (B*10)+(a[p]-'0');
-				p++;
-			}
-		}
-		else
-        {
-            int p=indexB+2;
-            while (p<length)
-            {
-                B = B*10 + (a[p]-'0');
-                p++;
-            }
-        }
-
-		if (flagplus == true && flagequal == true)
-            cout << A << " + " << B << " = " << A+B << endl;
-        if (flagplus == true && flagequal == false)
-            cout << A << " + " << B-A << " = " << B << endl;
-        if (flagplus == false && flagequal == true)
-            cout << A-B << " + " << B << " = " << A << endl;
+        num=num*10+(s[i]-'0');
     }
 
-    if (test)
-        cout << "\n";
-
-
-
+    return num;
+}
+int main()
+{
+	string s1,s2,s3,s4,s5;
+    int t,a,b,c;
+    cin>>t;
+    while(t)
+    {
+        cin>>s1>>s2>>s3>>s4>>s5;
+        a=charToNum(s1);
+        b=charToNum(s3);
+        c=charToNum(s5);
+        if(a == -1)
+         	a=c-b;
+        if(b == -1)
+        	b=c-a;
+        if(c == -1)
+        	c=a+b;
+        cout<<a<<" + "<<b<<" = "<<c<<endl;
+    }
+    return 0;
 }
