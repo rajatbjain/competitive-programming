@@ -1,4 +1,5 @@
 #include<iostream>
+//#include <fstream>
 using namespace std;
 
 int charToNum(string s)
@@ -16,6 +17,9 @@ int charToNum(string s)
 }
 int main()
 {
+    //freopen("input.txt", "r",stdin);
+    //freopen("output.txt", "w", stdout);
+
 	string s1,s2,s3,s4,s5;
     int t,a,b,c;
     cin>>t;
