@@ -15,11 +15,11 @@
 
 #include <iostream>
 #include <cstdio>
-#define gc getchar_unlocked
 
 using namespace std;
 typedef long long ll;
 
+#define gc getchar_unlocked
 int getInput()
 {
     register char c=gc();
