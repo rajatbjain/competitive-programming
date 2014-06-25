@@ -31,7 +31,6 @@ int main()
                 interim.pop();
             }
 
-
             if(givenVector[i]==want)
             {
                 want++;
@@ -46,7 +45,9 @@ int main()
             {
                 interim.push(givenVector[i]);
             }
+
         }
+        
         if(flag)
             cout << "yes\n";
         else
