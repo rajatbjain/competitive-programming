@@ -1,9 +1,3 @@
-/*
- ID:
- LANG: C++
- TASK: milk2
- */
-
 #include <iostream>
 #include <cstdio>
 #include <algorithm>

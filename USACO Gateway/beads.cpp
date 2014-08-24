@@ -1,8 +1,3 @@
-/*
- ID: rajat.r1
- LANG: C++
- TASK: beads
- */
 #include <iostream>
 #include <cstdio>
 #include <algorithm>
