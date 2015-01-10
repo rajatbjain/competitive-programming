@@ -1,28 +1,49 @@
 #include <iostream>
 #include <cstdio>
 #include <algorithm>
+#include <cstring>
+#include <vector>
+#include <list>
+#include <string>
+#include <map>
+#include <set>
+#include <bitset>
+#include <deque>
+#include <sstream>
+#include <utility>
+#include <functional>
+#include <numeric>
+#include <stack>
+#include <queue>
+#include <cmath>
+#include <cstdlib>
+#include <iomanip>
+
 using namespace std;
 
+void housekeeping() {
+  ios_base::sync_with_stdio(false);
+  // freopen("input.txt", "r", stdin);
+  // freopen("output.txt", "w", stdout);
+}
+
+int gcd(int a, int b) {
+  if(b == 0) return a;
+  else gcd(b, a % b);
+}
+
 int main() {
-
-    int a, b, c;
-    cin >> a >> b >> c;
-
-    int avg = (a+b+c)/2;
-    if((a+b+c - (2*avg))!=0){
-        cout << "Impossible\n";
+  housekeeping();
+  int a, b, c;
+  cin >> a >> b >> c;
+  int ul = min(a, b);
+  for(int i = 0; i <= ul; i++) {
+    int aa = a - i;
+    int bb = b - i;
+    if(aa + bb == c) {
+      cout << i << " " << bb << " " << aa << endl;
+      return 0;
     }
-    else {
-        int B = avg - a;
-        int C = avg - b;
-        int A = avg - c;
-
-        if(A>=0 && B>=0 && C>=0){
-            cout << A << " " << B << " " << C << endl;
-        }
-        else {
-            cout << "Impossible\n";
-        }
-    }
-
+  }
+  puts("Impossible");
 }

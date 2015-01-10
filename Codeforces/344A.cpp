@@ -1,25 +1,43 @@
 #include <iostream>
 #include <cstdio>
+#include <algorithm>
+#include <cstring>
+#include <vector>
+#include <list>
 #include <string>
+#include <map>
+#include <set>
+#include <bitset>
+#include <deque>
+#include <sstream>
+#include <utility>
+#include <functional>
+#include <numeric>
+#include <stack>
 #include <queue>
+#include <cmath>
+#include <cstdlib>
+#include <iomanip>
+
 using namespace std;
 
 int main() {
-
-    int N, c, count=1; string str; queue<string> S;
-    scanf("%d",&N);
-
-    for(int i=0; i<N-1; i++)
-    {
-        cin >> str;
-        if(i!=0) {
-            if(str[0]-'0' == c) c = str[0]-'0';
-            else count++;
-        }
-        c = str[1]-'0';
-
+  int n;
+  scanf("%d", &n);
+  int c = 0;
+  string s; char t;
+  for(int i = 0; i < n; i++) {
+    cin >> s;
+    if(i == 0) {
+      c++;
+      t = s[s.size() - 2];
     }
+    else {
+     if(s[s.size() - 2] == t) continue;
+     c++;
+     t = s[s.size() - 2];
+    }
+  }  
 
-    cout << count << endl;
-
+  cout << c << endl;
 }
