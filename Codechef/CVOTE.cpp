@@ -1,48 +1,46 @@
 #include <iostream>
 #include <cstdio>
-#include <string>
 #include <algorithm>
+#include <cstring>
+#include <vector>
+#include <string>
 #include <map>
+#include <set>
+#include <sstream>
+#include <utility>
+#include <functional>
+#include <numeric>
+#include <stack>
+#include <queue>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cassert>
+#include <bitset>
+#include <list>
+#include <memory.h>
+
 using namespace std;
-typedef map<string, int> MSI;
-map<string, string> cheftocountry;
-map<string, int> cheftoval;
-map<string, int> countrytoval;
 
+void solve() {
+  int n;
+  cin >> n;
 
-string best_string(const MSI &votes)
-{
-	int max_votes = 0;
-	string res = "";
-	for (MSI::const_iterator it = votes.begin(); it != votes.end(); ++it) {
-		if(max_votes < it->second) {
-			max_votes = it->second;
-			res = it->first;
-		}
-	}
-	return res;
+  int high = 0, low = 0;
+
+  for(int i = 0; i < n; i++) {
+    int foo;
+    cin >> foo;
+    high += foo;
+    low += foo == 0 ? 0 : foo - 1;
+  }
+
+  if(low < 100 && 100 <= high) puts("YES");
+  else puts("NO");
 }
 
 int main() {
-    int N, M;
-    scanf("%d%d",&N, &M);
-    for(int i=0; i<N; i++) {
-        string chef, country;
-        cin >> chef >> country;
-        cheftocountry[chef] = country;
-    }
-
-    for (int i=0; i<M; i++) {
-        string str;
-        cin >> str;
-        cheftoval[str] += 1;
-        str = cheftocountry[str];
-        countrytoval[str] += 1;
-    }
-
-
-    cout << best_string(countrytoval) << endl;
-    cout << best_string(cheftoval) << endl;
-
-    return 0;
+  int tt;
+  cin >> tt;
+  while(tt--) solve();
 }
