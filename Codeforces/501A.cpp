@@ -12,6 +12,7 @@
 #include <numeric>
 #include <stack>
 #include <queue>
+#include <cmath>
 #include <cstdlib>
 #include <ctime>
 #include <cassert>
@@ -21,16 +22,22 @@
 
 using namespace std;
 
-int a[1234];
-
 int main() {
   ios_base::sync_with_stdio(0);
-  int n, k;
-  cin >> n >> k;
-  for(int i = 0; i < n; i++) {
-    cin >> a[i + 1];
-  }
-  sort(a + 1, a + n + 1);
-  reverse(a + 1, a + n + 1);
-  cout << a[k] << endl;
+  int a, b, c, d;
+  cin >> a >> b >> c >> d;
+  
+   int pointsA = max( (3 * a) / 10 , a -  ((a / 250) * c));
+   int pointsB = max((3 * b) / 10, b - ((b / 250) * d));
+
+   if(pointsA > pointsB) {
+    puts("Misha");
+   }
+   else if(pointsA < pointsB) {
+    puts("Vasya");
+   }
+   else {
+    puts("Tie");
+   }
+
 }
