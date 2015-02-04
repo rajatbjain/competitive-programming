@@ -1,46 +1,76 @@
-#include <iostream>
 #include <cstdio>
+#include <bitset>
+#include <cassert>
+#include <sstream>
+#include <cstring>
+#include <cstdlib>
+#include <string>
 #include <vector>
+#include <set>
+#include <cmath>
+#include <memory.h>
+#include <ctime>
+#include <queue>
+#include <algorithm>
+#include <stack>
+#include <map>
+#include <iomanip>
+#include <utility>
+#include <iostream>
+#include <list>
 
 using namespace std;
 
-int main() {
-    int n, m, count=0;
-    cin >> n >> m;
-    vector< vector<bool> > V (n, vector<bool>(n));
+bool g[110][110];
+bool tmp[110][110];
 
-    for(int i=0; i<m; i++) {
-        int u, v;
-        cin >> u >> v;
-        V[u-1][v-1] = V[v-1][u-1] = true;
+int Has(int index) {
+  int cnt = 0;
+  for(int i = 1; i <= 100; i++) {
+    if(g[index][i]) cnt++; 
+  }
+  return cnt;
+}
+
+void Remove(int index) {
+  for(int i = 0; i <= 100; i++) {
+    tmp[i][index] = tmp[index][i] = false;
+  }
+}
+
+void Copy() {
+  for(int i = 0; i <= 100; i++) {
+    for(int j = 0; j <= 100; j++) {
+      g[i][j] = tmp[i][j];
     }
-    int cnt[n]; int cc=0;
-    bool flag=true;
-    while(flag) {
-        flag= false;
-        for(int i=0; i<n; i++) {
-        cc=0;
-        for(int j=0; j<n; j++) {
-            if(V[i][j] == 1) {
-                cc++;
-            }
-        }
-        cnt[i] = cc;
-        }
+  }
+}
 
-        for(int i=0; i<n; i++) {
-            if(cnt[i] == 1) {
-                flag=true;
-                for(int j=0; j<n; j++){
-                    V[i][j] = V[j][i] = 0;
-                }
-            }
-        }
-
-        if(flag) count++;
+int main(int argc, char* argv[]) {
+  ios_base::sync_with_stdio(0);
+  int n, m;
+  cin >> n >> m;
+  for(int i = 0; i < m; i++) {
+    int x, y;
+    cin >> x >> y;
+    g[x][y] = g[y][x] = 1;
+    tmp[x][y] = tmp[y][x] = 1;
+  }
+  int total = 0;
+  while(true) {
+    bool removed = false;
+    for(int i = 1; i <= n; i++) {
+      if(Has(i) == 1) {
+        Remove(i);
+        removed = true;
+      }
     }
-
-    cout << count << endl;
-
-
+    if(!removed) {
+      break;
+    } else {
+      total++;
+      Copy();
+    }
+  }
+  cout << total << endl;
 }
