@@ -12,24 +12,21 @@
 
 using namespace std;
 
-class DecipherabilityEasy {
+class KitayutaMart2 {
     public:
-    string check(string s, string t) {
-        if(s.size() - t.size() > 1 ) return "Impossible";
-        bool once = false;
-        for(int i = 0; i < s.size(); i++) {
-          if(s[i] != t[i]) {
-            s.erase(s.begin() + i);
-            if(s == t) return "Possible";
-            break;
-          }          
+    int numBought(int K, int T) {
+        int ans = 0;
+        int total = 0;
+        for(int i = 0; ; i++) {
+          total += (1 << i) * K;
+          ans++;
+          if(total == T) return ans;
         }
-        return "Impossible";
     }
 };
 
 // CUT begin
-ifstream data("DecipherabilityEasy.sample");
+ifstream data("KitayutaMart2.sample");
 
 string next_line() {
     string s;
@@ -57,10 +54,10 @@ string to_string(string t) {
     return "\"" + t + "\"";
 }
 
-bool do_test(string s, string t, string __expected) {
+bool do_test(int K, int T, int __expected) {
     time_t startClock = clock();
-    DecipherabilityEasy *instance = new DecipherabilityEasy();
-    string __result = instance->check(s, t);
+    KitayutaMart2 *instance = new KitayutaMart2();
+    int __result = instance->numBought(K, T);
     double elapsed = (double)(clock() - startClock) / CLOCKS_PER_SEC;
     delete instance;
 
@@ -81,12 +78,12 @@ int run_test(bool mainProcess, const set<int> &case_set, const string command) {
     while (true) {
         if (next_line().find("--") != 0)
             break;
-        string s;
-        from_stream(s);
-        string t;
-        from_stream(t);
+        int K;
+        from_stream(K);
+        int T;
+        from_stream(T);
         next_line();
-        string __answer;
+        int __answer;
         from_stream(__answer);
 
         cases++;
@@ -94,13 +91,13 @@ int run_test(bool mainProcess, const set<int> &case_set, const string command) {
             continue;
 
         cout << "  Testcase #" << cases - 1 << " ... ";
-        if ( do_test(s, t, __answer)) {
+        if ( do_test(K, T, __answer)) {
             passed++;
         }
     }
     if (mainProcess) {
         cout << endl << "Passed : " << passed << "/" << cases << " cases" << endl;
-        int T = time(NULL) - 1423584003;
+        int T = time(NULL) - 1422878403;
         double PT = T / 60.0, TT = 75.0;
         cout << "Time   : " << T / 60 << " minutes " << T % 60 << " secs" << endl;
         cout << "Score  : " << 250 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT)) << " points" << endl;
@@ -121,7 +118,7 @@ int main(int argc, char *argv[]) {
         }
     }
     if (mainProcess) {
-        cout << "DecipherabilityEasy (250 Points)" << endl << endl;
+        cout << "KitayutaMart2 (250 Points)" << endl << endl;
     }
     return run_test(mainProcess, cases, argv[0]);
 }
