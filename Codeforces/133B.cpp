@@ -1,7 +1,7 @@
-#include <cstdio>
 #include <iostream>
-#include <cstring>
+#include <cstdio>
 #include <algorithm>
+#include <cstring>
 #include <vector>
 #include <string>
 #include <map>
@@ -14,41 +14,56 @@
 #include <queue>
 #include <cmath>
 #include <cstdlib>
-#include <iomanip>
 #include <ctime>
 #include <cassert>
+#include <bitset>
+#include <list>
+#include <memory.h>
 
 using namespace std;
 
-void housekeeping() {
-  ios_base::sync_with_stdio(false);
-  freopen("input.txt", "r", stdin);
-}
-
-const int md = 1000003;
-
-map<char, string> mp;
+map< char, string > a;
+map< string, int > b;
 void init() {
-mp['>'] = 1000,
-mp['<'] = 1001,
-mp['+'] = 1010,
-mp['-'] = 1011,
-mp['.'] = 1100,
-mp[','] = 1101,
-mp['['] = 1110,
-mp[']'] = 1111;
+  a['>'] = "1000";
+  a['<'] = "1001";
+  a['+'] = "1010";
+  a['-'] = "1011";
+  a['.'] = "1100";
+  a[','] = "1101";
+  a['['] = "1110";
+  a[']'] = "1111";
+  b["000"] = 0;
+  b["001"] = 1;
+  b["010"] = 2;
+  b["011"] = 3;
+  b["100"] = 4;
+  b["101"] = 5;
+  b["110"] = 6;
+  b["111"] = 7;
 }
+
+const int mod = (int)1e6 + 3;
 
 int main() {
-  housekeeping();
   init();
   string s;
   cin >> s;
-  string t;
+  string t = "";
   for(int i = 0; i < s.size(); i++) {
-    t += mp[s[i]];
+    t += a[s[i]];
+  }    
+  int sz = t.size();
+  int num = 0;
+  int mul = 1;
+  for(int i = sz - 1; i >= 0; i--) {
+    if(t[i] == '1') {
+      num += mul;
+      num %= mod;
+    }
+    mul <<= 1;
+    mul %= mod;
   }
-  long long ans = 0;
-  for(int i = t.size() - 1, j = 0; i >= 0; i--, j++) {
-  }
+  printf("%d\n", num);
+  return 0;
 }
