@@ -3,45 +3,64 @@
 #include <algorithm>
 #include <cstring>
 #include <vector>
-#include <list>
 #include <string>
 #include <map>
 #include <set>
-#include <bitset>
-#include <deque>
 #include <sstream>
 #include <utility>
 #include <functional>
 #include <numeric>
-#include <stack>	
+#include <stack>
 #include <queue>
 #include <cmath>
 #include <cstdlib>
-#include <iomanip>
+#include <ctime>
+#include <cassert>
+#include <bitset>
+#include <list>
+#include <memory.h>
+
+#define long long long
+#define lld I64d
 
 using namespace std;
 
-int cnvrt(char a) {
-  if(a == 'a') return 1;
-  if(a == 'b') return 2;
-  if(a == 'c') return 3;
-  if(a == 'd') return 4;
-  if(a == 'e') return 5;
-  if(a == 'f') return 6;
-  if(a == 'g') return 7;
-  if(a == 'h') return 8;
+const int dx[] = {-1, -1, -1, 0, 0, 1, 1 , 1};
+const int dy[] = {-1, 0, 1, -1, 1, -1, 0, 1};
+pair< int, int > from, to;
+vector< string > repr;
+
+inline bool equals( const pair< int, int > &a, const pair< int, int > &b) {
+  return a.first == b.first && a.second == b.second;
 }
 
-int dist[9][9];
-
-void bfs(pair<int, int> a, pair<int, int>b) {
-
+string strip(string& s) {
+  istringstream scanner(s);
+  scanner >> s;
+  return s;
 }
-
 
 int main() {
-  char a1, a2, b1, b2;
-  cin >> a1 >> a2 >> b1 >> b2;
-  pair<int, int> A(cnvrt(a1), a2-'0'), B(cnvrt(b1), b2-'0');
-  bfs(A, B);
+  string s, t;
+  cin >> s >> t;
+  from = make_pair(s[0] - 'a' + 1, s[1] - '0');
+  to = make_pair(t[0] - 'a' + 1, t[1] - '0');
+  while(!equals(from, to)) {
+    int x = from.first == to.first ? 0 : from.first < to.first ? -1 : 1;
+    int y = from.second == to.second ? 0 : from.second < to.second ? -1 : 1;
+    string put = "  ";
+    if(x == 1) put[0] = 'L';
+    if(x == -1) put[0] = 'R';
+    if(y == 1) put[1] = 'D';
+    if(y == -1) put[1] = 'U';
+    repr.push_back(put);
+    from.first -= x;
+    from.second -= y;
+  }
+  int sz = repr.size();
+  cout << sz << '\n';
+  for(int i = 0; i < sz; i++) {
+    cout << strip(repr[i]) << "\n";
+  }
+  return 0;
 }
