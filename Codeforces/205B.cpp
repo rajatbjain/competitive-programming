@@ -23,30 +23,25 @@
 using namespace std;
 
 int n;
-string s;
-string b;
-string a;
+long long a[123456];
+long long need[123456];
+long long ans[123456];
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin >> n;
-  for (int i = 0; i < n; i++) {
-    cin >> s;
-    b += "<3" + s;
+  for(int i = 0; i < n; i++) {
+    cin >> a[i];
   }
-  b += "<3";
-  cin >> a;
-  int asz = a.size();
-  int bsz = b.size();
-  int i = 0, j = 0;
-  for(; i < asz && j < bsz; i++) {
-    if(a[i] == b[j]) j++; 
+  for(int i = 1; i < n; i++) {
+    if(need[i - 1] + a[i - 1] > a[i]) {
+      need[i] = need[i - 1] + a[i - 1] - a[i];
+    }
   }
-  if(j == bsz) {
-    cout << "yes\n";
+  for(int i = 1; i < n; i++) {
+    ans[i] = max(0LL, need[i] - need[i - 1]);
   }
-  else {
-    cout << "no\n";
-  }
+  for (int i = 1; i < n; i++) ans[i] += ans[i - 1];
+  cout << ans[n - 1] << endl;
   return 0;
 }

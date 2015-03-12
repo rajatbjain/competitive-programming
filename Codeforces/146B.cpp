@@ -22,31 +22,35 @@
 
 using namespace std;
 
-int n;
-string s;
-string b;
-string a;
+int luckyRepresentation(int a) {
+  string s;
+  while(a) {
+    int cur = a % 10;
+    if(cur == 7 || cur == 4) {
+       s += cur + '0';
+    }
+    a /= 10;
+  }
+  int sz = s.size();
+  int ret = 0;
+  for(int i = sz - 1; i >= 0; i--) ret = ret * 10 + (s[i] - '0');
+  return ret;
+}
 
 int main() {
   ios_base::sync_with_stdio(false);
-  cin >> n;
-  for (int i = 0; i < n; i++) {
-    cin >> s;
-    b += "<3" + s;
+  int a, b;
+  cin >> a >> b;
+  if(b > a) {
+    cout << b << endl;
+    return 0;
   }
-  b += "<3";
-  cin >> a;
-  int asz = a.size();
-  int bsz = b.size();
-  int i = 0, j = 0;
-  for(; i < asz && j < bsz; i++) {
-    if(a[i] == b[j]) j++; 
-  }
-  if(j == bsz) {
-    cout << "yes\n";
-  }
-  else {
-    cout << "no\n";
+  a++;
+  for( ; ; a++) {
+    if(luckyRepresentation(a) == b) {
+      cout << a << endl;
+      return 0;
+    }
   }
   return 0;
 }

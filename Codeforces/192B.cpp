@@ -22,31 +22,31 @@
 
 using namespace std;
 
+pair< int, int > a[1234];
+bool bad[1234];
 int n;
-string s;
-string b;
-string a;
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin >> n;
-  for (int i = 0; i < n; i++) {
-    cin >> s;
-    b += "<3" + s;
+  for(int i = 1; i <= n; i++) {
+    cin >> a[i].first;
+    a[i].second = i;
   }
-  b += "<3";
-  cin >> a;
-  int asz = a.size();
-  int bsz = b.size();
-  int i = 0, j = 0;
-  for(; i < asz && j < bsz; i++) {
-    if(a[i] == b[j]) j++; 
-  }
-  if(j == bsz) {
-    cout << "yes\n";
-  }
-  else {
-    cout << "no\n";
+  sort(a + 1, a + n + 1);
+  for(int i = 1; i <= n; i++) {
+    pair< int , int > x = a[i];
+    if(x.second == 1 || x.second == n) {
+      cout << x.first << "\n";
+      return 0;
+    }
+    else {
+      bad[x.second] = 1;
+      if(bad[x.second - 1] || bad[x.second + 1]) {
+        cout << x.first << "\n";
+        return 0;
+      }
+    }
   }
   return 0;
 }
